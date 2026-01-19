@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">SuperCopy</string>
+
+    <!-- Main Screen -->
+    <string name="capture">Capture</string>
+    <string name="processing">Processing...</string>
+    <string name="copy">Copy</string>
+    <string name="delete">Delete</string>
+    <string name="clear_history">Clear History</string>
+    <string name="copy_success">Text copied to clipboard</string>
+    <string name="no_text_found">No text found in the image</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+
+    <!-- Empty State -->
+    <string name="empty_history_title">No clipboard history</string>
+    <string name="empty_history_description">Tap the capture button to take a screenshot and extract text</string>
+
+    <!-- OCR Result Dialog -->
+    <string name="ocr_result_title">识别结果</string>
+    <string name="copy_to_clipboard_prompt">Copy this text to clipboard?</string>
+    <string name="recognizing_text">正在识别…</string>
+    <string name="ocr_error">识别失败</string>
+    <string name="no_screenshot">没有截图</string>
+
+    <!-- Floating Button -->
+    <string name="floating_button_title">Floating Button</string>
+    <string name="floating_button_enabled">Tap the floating button on screen to capture</string>
+    <string name="floating_button_disabled">Enable to show floating capture button</string>
+    <string name="floating_notification_title">Floating Button Active</string>
+    <string name="floating_notification_text">Tap the floating button to capture screen</string>
+    <string name="stop_floating">Stop</string>
+
+    <!-- Notifications -->
+    <string name="notification_title">Screen Capture Active</string>
+    <string name="notification_text">SuperCopy is ready to capture screenshots</string>
+    <string name="stop_capture">Stop</string>
+
+    <!-- Permissions -->
+    <string name="permission_denied">Screen capture permission denied</string>
+    <string name="overlay_permission_denied">Overlay permission denied</string>
+</resources>
