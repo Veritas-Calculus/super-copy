@@ -7,7 +7,14 @@ queries:
 # Paths to ignore for code scanning
 paths-ignore:
   # Generated code from KSP/Room
-  - '**/build/generated/**'
-  - '**/build/ksp/**'
+  - '**/build/**'
   - '**/*_Impl.kt'
   - '**/*_Impl.java'
+
+# Query filters to exclude specific rules for backward compatibility code
+query-filters:
+  # Exclude deprecated-call warnings (necessary for API 29/32 backward compatibility)
+  - exclude:
+      id: java/deprecated-call
+      paths:
+        - app/src/main/java/ac/plz/super_copy/service/ScreenCaptureService.kt
