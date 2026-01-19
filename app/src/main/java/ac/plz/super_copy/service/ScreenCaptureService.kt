@@ -72,12 +72,7 @@ class ScreenCaptureService : Service() {
             ACTION_START_CAPTURE -> {
                 Log.d(TAG, "ACTION_START_CAPTURE")
                 val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, Activity.RESULT_CANCELED)
-                val data = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableExtra(EXTRA_DATA, Intent::class.java)
-                } else {
-                    @Suppress("DEPRECATION")
-                    intent.getParcelableExtra(EXTRA_DATA)
-                }
+                val data = getParcelableExtraCompat<Intent>(intent, EXTRA_DATA)
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     startForegroundService()
                     startMediaProjection(resultCode, data)
@@ -91,12 +86,7 @@ class ScreenCaptureService : Service() {
                 // One-shot mode: capture once then stop service
                 isOneShotMode = true
                 val resultCode = intent.getIntExtra(EXTRA_RESULT_CODE, Activity.RESULT_CANCELED)
-                val data = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableExtra(EXTRA_DATA, Intent::class.java)
-                } else {
-                    @Suppress("DEPRECATION")
-                    intent.getParcelableExtra(EXTRA_DATA)
-                }
+                val data = getParcelableExtraCompat<Intent>(intent, EXTRA_DATA)
                 Log.d(TAG, "resultCode=$resultCode, data=${data != null}")
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     try {
@@ -149,12 +139,23 @@ class ScreenCaptureService : Service() {
 
     private fun setupScreenMetrics() {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val metrics = DisplayMetrics()
-        @Suppress("DEPRECATION")
-        windowManager.defaultDisplay.getRealMetrics(metrics)
-        screenDensity = metrics.densityDpi
-        screenWidth = metrics.widthPixels
-        screenHeight = metrics.heightPixels
+        val windowMetrics = windowManager.currentWindowMetrics
+        val bounds = windowMetrics.bounds
+        screenWidth = bounds.width()
+        screenHeight = bounds.height()
+        screenDensity = resources.displayMetrics.densityDpi
+    }
+
+    private inline fun <reified T : android.os.Parcelable> getParcelableExtraCompat(
+        intent: Intent,
+        name: String
+    ): T? {
+        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(name, T::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(name)
+        }
     }
 
     private fun startForegroundService() {
