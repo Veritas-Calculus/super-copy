@@ -3,7 +3,7 @@
 
     <!-- Main Screen -->
     <string name="capture">Capture</string>
-    <string name="processing">Processing...</string>
+    <string name="processing">Processing…</string>
     <string name="copy">Copy</string>
     <string name="delete">Delete</string>
     <string name="clear_history">Clear History</string>
@@ -37,6 +37,5 @@
     <string name="stop_capture">Stop</string>
 
     <!-- Permissions -->
-    <string name="permission_denied">Screen capture permission denied</string>
     <string name="overlay_permission_denied">Overlay permission denied</string>
 </resources>

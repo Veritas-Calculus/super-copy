@@ -28,6 +28,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import androidx.core.content.edit
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -421,7 +422,7 @@ class FloatingButtonService : Service() {
     }
 
     private fun saveFloatingButtonEnabled(enabled: Boolean) {
-        prefs.edit().putBoolean(KEY_FLOATING_ENABLED, enabled).apply()
+        prefs.edit { putBoolean(KEY_FLOATING_ENABLED, enabled) }
     }
 
     companion object {

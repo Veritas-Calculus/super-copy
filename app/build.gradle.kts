@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "ac.plz.super_copy"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 

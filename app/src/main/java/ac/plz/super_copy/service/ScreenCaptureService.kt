@@ -139,10 +139,18 @@ class ScreenCaptureService : Service() {
 
     private fun setupScreenMetrics() {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val windowMetrics = windowManager.currentWindowMetrics
-        val bounds = windowMetrics.bounds
-        screenWidth = bounds.width()
-        screenHeight = bounds.height()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            val windowMetrics = windowManager.currentWindowMetrics
+            val bounds = windowMetrics.bounds
+            screenWidth = bounds.width()
+            screenHeight = bounds.height()
+        } else {
+            val displayMetrics = android.util.DisplayMetrics()
+            @Suppress("DEPRECATION")
+            windowManager.defaultDisplay.getRealMetrics(displayMetrics)
+            screenWidth = displayMetrics.widthPixels
+            screenHeight = displayMetrics.heightPixels
+        }
         screenDensity = resources.displayMetrics.densityDpi
     }
 
@@ -328,10 +336,10 @@ class ScreenCaptureService : Service() {
             val rowStride = planes[0].rowStride
             val rowPadding = rowStride - pixelStride * screenWidth
 
-            val bitmap = Bitmap.createBitmap(
+            val bitmap = android.graphics.Bitmap.createBitmap(
                 screenWidth + rowPadding / pixelStride,
                 screenHeight,
-                Bitmap.Config.ARGB_8888
+                android.graphics.Bitmap.Config.ARGB_8888
             )
             bitmap.copyPixelsFromBuffer(buffer)
 
