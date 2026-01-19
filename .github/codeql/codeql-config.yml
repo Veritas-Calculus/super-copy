@@ -1,0 +1,13 @@
+name: "SuperCopy CodeQL Config"
+
+# Queries to run
+queries:
+  - uses: security-and-quality
+
+# Paths to ignore for code scanning
+paths-ignore:
+  # Generated code from KSP/Room
+  - '**/build/generated/**'
+  - '**/build/ksp/**'
+  - '**/*_Impl.kt'
+  - '**/*_Impl.java'

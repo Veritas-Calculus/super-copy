@@ -155,16 +155,16 @@ class TextRecognitionManager {
         if (latinResult.text.isBlank()) return chineseResult.text
 
         // Analyze content to determine best result
-        val chineseCharCount = chineseResult.text.count { it.code > 0x4E00 && it.code < 0x9FFF }
+        val chineseCharCount = chineseResult.text.count { it.code in 0x4E00..0x9FFF }
         val latinCharCount = latinResult.text.count { it.isLetter() && it.code < 128 }
-
-        val totalChars = max(chineseResult.text.length, 1)
+        val totalChars = max(chineseResult.text.length, latinResult.text.length).coerceAtLeast(1)
         val chineseRatio = chineseCharCount.toFloat() / totalChars
+        val latinRatio = latinCharCount.toFloat() / totalChars
 
-        // If more than 20% Chinese characters, prefer Chinese recognizer
-        // Otherwise use the one with higher confidence
+        // Use character ratios and confidence to determine best result
         return when {
             chineseRatio > 0.2f -> chineseResult.text
+            latinRatio > 0.6f && latinResult.confidence > chineseResult.confidence -> latinResult.text
             latinResult.confidence > chineseResult.confidence + 0.1f -> latinResult.text
             preferChinese -> chineseResult.text
             else -> latinResult.text

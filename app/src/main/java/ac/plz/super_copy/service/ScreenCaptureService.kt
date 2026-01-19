@@ -137,6 +137,7 @@ class ScreenCaptureService : Service() {
         super.onDestroy()
     }
 
+    @Suppress("DEPRECATION") // Required for API 29 compatibility
     private fun setupScreenMetrics() {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
@@ -145,8 +146,8 @@ class ScreenCaptureService : Service() {
             screenWidth = bounds.width()
             screenHeight = bounds.height()
         } else {
+            // Legacy path for API 29 - lgtm[java/deprecated-call]
             val displayMetrics = android.util.DisplayMetrics()
-            @Suppress("DEPRECATION")
             windowManager.defaultDisplay.getRealMetrics(displayMetrics)
             screenWidth = displayMetrics.widthPixels
             screenHeight = displayMetrics.heightPixels
@@ -154,6 +155,7 @@ class ScreenCaptureService : Service() {
         screenDensity = resources.displayMetrics.densityDpi
     }
 
+    @Suppress("DEPRECATION") // Required for API < 33 compatibility
     private inline fun <reified T : android.os.Parcelable> getParcelableExtraCompat(
         intent: Intent,
         name: String
@@ -161,7 +163,7 @@ class ScreenCaptureService : Service() {
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(name, T::class.java)
         } else {
-            @Suppress("DEPRECATION")
+            // Legacy path for API < 33 - lgtm[java/deprecated-call]
             intent.getParcelableExtra(name)
         }
     }
