@@ -8,12 +8,12 @@ plugins {
 subprojects {
     configurations.all {
         resolutionStrategy {
-            // Netty vulnerabilities (CVE-2023-44487, CVE-2024-29025, etc.)
-            force("io.netty:netty-codec:4.1.118.Final")
-            force("io.netty:netty-codec-http:4.1.118.Final")
-            force("io.netty:netty-codec-http2:4.1.118.Final")
-            force("io.netty:netty-handler:4.1.118.Final")
-            force("io.netty:netty-common:4.1.118.Final")
+            // Netty vulnerabilities (CVE-2025-55163, CVE-2025-58057, CVE-2025-67735, etc.)
+            force("io.netty:netty-codec:4.1.129.Final")
+            force("io.netty:netty-codec-http:4.1.129.Final")
+            force("io.netty:netty-codec-http2:4.1.129.Final")
+            force("io.netty:netty-handler:4.1.129.Final")
+            force("io.netty:netty-common:4.1.129.Final")
             
             // Guava vulnerability (CVE-2023-2976)
             force("com.google.guava:guava:33.4.0-jre")
