@@ -19,7 +19,7 @@ subprojects {
             force("com.google.guava:guava:33.4.0-jre")
             
             // Protobuf vulnerability (CVE-2024-7254)
-            force("com.google.protobuf:protobuf-java:4.29.3")
+            force("com.google.protobuf:protobuf-java:4.33.4")
             
             // Commons Compress vulnerabilities
             force("org.apache.commons:commons-compress:1.27.1")
