@@ -16,7 +16,7 @@ subprojects {
             force("io.netty:netty-common:4.1.129.Final")
             
             // Guava vulnerability (CVE-2023-2976)
-            force("com.google.guava:guava:33.4.0-jre")
+            force("com.google.guava:guava:33.5.0-jre")
             
             // Protobuf vulnerability (CVE-2024-7254)
             force("com.google.protobuf:protobuf-java:4.29.3")
