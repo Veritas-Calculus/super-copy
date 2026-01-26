@@ -22,7 +22,7 @@ subprojects {
             force("com.google.protobuf:protobuf-java:4.29.3")
             
             // Commons Compress vulnerabilities
-            force("org.apache.commons:commons-compress:1.27.1")
+            force("org.apache.commons:commons-compress:1.28.0")
             
             // JDOM2 XXE vulnerability
             force("org.jdom:jdom2:2.0.6.1")
